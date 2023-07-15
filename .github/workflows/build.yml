@@ -25,6 +25,6 @@ jobs:
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        files: ${{ env.projectName }}-build-${{ github.run_number }}.zip
+        files: resource-pack-build-${{ github.run_number }}.zip
         tag_name: build-${{ github.run_number }}
-        name: ${{ env.projectName }}.zip
+        name: resource-pack.zip
