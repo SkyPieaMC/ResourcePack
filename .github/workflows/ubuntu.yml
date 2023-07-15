@@ -1,15 +1,25 @@
-name: Zip Files
+name: Minecraft Resource Pack Build
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: master
+  pull_request:
+    branches: master
 
 jobs:
-  zip-files:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v2
-      - uses: vimtor/action-zip@v1
-        with:
-          files: dist/ manifest.json
-          dest: SkyPieaMC.zip
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      
+    - name: Archive Resource Pack
+      run: |
+        zip -r resource_pack.zip assets/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: resource-pack
+        path: resource_pack.zip
